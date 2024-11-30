@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# 数据库目录和验证器相关设置
 DB_DIR="/opt/hyperlane_db_base"
 HYPERLANE_CONTAINER_NAME="hyperlane"
 VALIDATOR_COUNT=0  # 动态管理创建的验证器数量
@@ -156,7 +157,7 @@ monitor_container_health() {
         container_name="hyperlane-validator-$i"
         health_status=$(docker inspect --format '{{.State.Health.Status}}' "$container_name")
         if [ "$health_status" != "healthy" ]; then
-            echo "$container_name 状态异常，状态为: $health_status" | mail -s "Hyperlane 验证器警告" admin@example.com
+            echo "$container_name 状态异常，状态为: $health_status"
         fi
     done
 }
